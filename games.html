@@ -45,6 +45,7 @@
       document.getElementById(`my${position}Date`).innerText = jsonDataObject.objectEndDate;
       document.getElementById(`my${position}Title`).innerText = jsonDataObject.title;
       document.getElementById(`my${position}Department`).innerText = jsonDataObject.department;
+      document.getElementById(`my${position}Id`).innerText = jsonDataObject.objectID;
       }
   </script>
 
@@ -111,7 +112,8 @@
         <div id="info_label_left">
           Title: <span id="myLeftTitle" class="info_content"></span> <br>
           Department: <span id="myLeftDepartment" class="info_content"></span> <br>
-          Date: <span id="myLeftDate" class="info_content"></span>
+          Date: <span id="myLeftDate" class="info_content"></span> <br>
+          Id: <span id="myLeftId" class="info_content"></span>
         </div>
       </div>
     </div>
@@ -124,7 +126,8 @@
         <div id="info_label_right">
           Title: <span id="myRightTitle" class="info_content"></span> <br>
           Department: <span id="myRightDepartment" class="info_content"></span> <br>
-          Date: <span id="myRightDate" class="info_content"></span>
+          Date: <span id="myRightDate" class="info_content"></span> <br>
+          Id: <span id="myRightId" class="info_content"></span>
         </div>
       </div>
     </div>
