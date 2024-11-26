@@ -3,10 +3,19 @@
 <html lang="en">
 
 <head>
+  <!-- main meta tags -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title> artsy game </title>
+
+
+   <!-- google font -->
+
+  <!-- link to CSS -->
   <link rel="stylesheet" href="style.css">
+
+  <!-- link to JavaScript -->
+  <script src="app.js" async></script>
 </head>
 
 <body>
@@ -96,71 +105,72 @@
 
 
   <!-- HTLM to create the layout -->
-  
-  <div id="header">
-    <h1>Artsy Game</h1> 
-    <h2>Let's find out something about art!</h2> 
-  </div>
+   <main>
+    <!-- our main content goes here --> 
+      <div id="header">
+        <h1>Artsy Game</h1> 
+        <h2>Let's find out something about art!</h2> 
+      </div>
 
-  <div class="grid-container">
+      <div class="grid-container">
 
-    <div class="card_grid">
-      <div id="card_left">
-        <div class="img_container">
-          <img src="https://github.com/gmullery/654final/tree/fd9001ae2ed5eca65b74609908fc69e2f7e69cd5/images/blacksquare.png" id="myLeftImg" alt="myLeftTitle" class="full_image"> 
-        </div> <br>
-        <div id="info_label_left">
-          Title: <span id="myLeftTitle" class="info_content"></span> <br>
-          Department: <span id="myLeftDepartment" class="info_content"></span> <br>
-          Date: <span id="myLeftDate" class="info_content"></span> <br>
-          Id: <span id="myLeftId" class="info_content"></span>
+        <div class="card_grid">
+          <div id="card_left">
+            <div class="img_container">
+              <img src="https://github.com/gmullery/654final/tree/fd9001ae2ed5eca65b74609908fc69e2f7e69cd5/images/blacksquare.png" id="myLeftImg" alt="myLeftTitle" class="full_image"> 
+            </div> <br>
+            <div id="info_label_left">
+              Title: <span id="myLeftTitle" class="info_content"></span> <br>
+              Department: <span id="myLeftDepartment" class="info_content"></span> <br>
+              Date: <span id="myLeftDate" class="info_content"></span> <br>
+              Id: <span id="myLeftId" class="info_content"></span>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
 
-    <div class="card_grid">
-      <div id="card_right">
-        <div class="img_container">
-          <img src="https://github.com/gmullery/654final/tree/fd9001ae2ed5eca65b74609908fc69e2f7e69cd5/images/blacksquare.png" id="myRightImg" alt="myRightTitle" class="full_image"> 
-        </div> <br>
-        <div id="info_label_right">
-          Title: <span id="myRightTitle" class="info_content"></span> <br>
-          Department: <span id="myRightDepartment" class="info_content"></span> <br>
-          Date: <span id="myRightDate" class="info_content"></span> <br>
-          Id: <span id="myRightId" class="info_content"></span>
+        <div class="card_grid">
+          <div id="card_right">
+            <div class="img_container">
+              <img src="https://github.com/gmullery/654final/tree/fd9001ae2ed5eca65b74609908fc69e2f7e69cd5/images/blacksquare.png" id="myRightImg" alt="myRightTitle" class="full_image"> 
+            </div> <br>
+            <div id="info_label_right">
+              Title: <span id="myRightTitle" class="info_content"></span> <br>
+              Department: <span id="myRightDepartment" class="info_content"></span> <br>
+              Date: <span id="myRightDate" class="info_content"></span> <br>
+              Id: <span id="myRightId" class="info_content"></span>
+            </div>
+          </div>
         </div>
+
+
+        <div class="card_grid">
+          <div id="quiz_cta">
+            <p>Which one is the oldest?</p> <br>
+            <button type="button" id="submit_left" onClick="calculateOlder('left')">← Left is older</button>
+            <button type="button" id="submit_right" onClick="calculateOlder('right')">Right is older →</button> <br>
+            <button type="button" id="submit_next" onClick="getPairedElements()">Next Pair</button>
+          </div>
+
+          <div id="quiz_cta">
+            <p>Result:</p> <br>
+            <h1 id="myResultMessage"></h1>
+            <span id="myResult" class="info_content"></span> <br>
+          </div>
+
+          <div>
+            Id of the random element: <span id="elementId"></span> <br>
+            Total of elements: <span id="totalCount"></span> <br>
+          </div>
+
+        </div>
+
       </div>
-    </div>
+    </main>
 
-
-    <div class="card_grid">
-      <div id="quiz_cta">
-        <p>Which one is the oldest?</p> <br>
-        <button type="button" id="submit_left" onClick="calculateOlder('left')">← Left is older</button>
-        <button type="button" id="submit_right" onClick="calculateOlder('right')">Right is older →</button> <br>
-        <button type="button" id="submit_next" onClick="getPairedElements()">Next Pair</button>
-      </div>
-
-      <div id="quiz_cta">
-        <p>Result:</p> <br>
-        <h1 id="myResultMessage"></h1>
-        <span id="myResult" class="info_content"></span> <br>
-      </div>
-
-      <div>
-        Id of the random element: <span id="elementId"></span> <br>
-        Total of elements: <span id="totalCount"></span> <br>
-      </div>
-
-    </div>
-
-  </div>
-
+  <!-- footer --> 
   <footer>
-    <p>&copy; 2024 by Alice Viggiani, Aswathi Thilak, Bria Pickel, Grace Mullery, Ritika Ramesh. All Rights Reserved.</p>
+    <p>&copy; 2024 by Ritika Ramesh, Bria Pickel, Grace Mullery, Ashwathi Thilak, Alice Viggiani. All Rights Reserved.</p>
   </footer>
-
-
 
 </body>
 </html>
