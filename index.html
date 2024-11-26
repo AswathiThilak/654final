@@ -15,113 +15,140 @@
         <!-- link to JavaScript -->
         <script src="app.js" async></script>
       </head>
-<body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="renaissance.html">Renaissance</a></li>
-                <li><a href="baroque.html">Baroque</a></li>
-                <li><a href="medieval.html">Medieval</a></li>
-                <li><a href="games.html">Games</a></li>
-                <li><a href="resources.html">Resources</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <main>
-        <div id="header">
-            <h1>Art History Explorer</h1>
-            <h2>Discover Art Through Different Time Periods</h2>
-        </div>
-
-        <div class="grid-container">
-            <div class="card_grid">
-                <div class="img_container">
-                    <img src="#" id="artworkImage1" alt="" class="full_image">
+      <body>
+        <header>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="renaissance.html">Renaissance</a></li>
+                    <li><a href="baroque.html">Baroque</a></li>
+                    <li><a href="medieval.html">Medieval</a></li>
+                    <li><a href="games.html">Games</a></li>
+                    <li><a href="resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </header>
+    
+        <main>
+            <div id="header">
+                <h1></h1>
+                <h2></h2>
+            </div>
+    
+            <div class="grid-container">
+                <div class="card_grid">
+                    <div class="img_container">
+                        <img src="#" id="artworkImage1" alt="" class="full_image">
+                    </div>
+                    <br>
+                    <div class="info_label">
+                        <strong>Title:</strong> <span id="artworkTitle1" class="info_content"></span><br>
+                        <strong>Period:</strong> <span id="artworkPeriod1" class="info_content"></span><br>
+                        <strong>Artist:</strong> <span id="artworkArtist1" class="info_content"></span><br>
+                        <strong>Date:</strong> <span id="artworkDate1" class="info_content"></span>
+                    </div>
                 </div>
-                <br>
-                <div class="info_label">
-                    <strong>Title:</strong> <span id="artworkTitle1" class="info_content"></span><br>
-                    <strong>Period:</strong> <span id="artworkPeriod1" class="info_content"></span><br>
-                    <strong>Artist:</strong> <span id="artworkArtist1" class="info_content"></span><br>
+    
+                <div class="card_grid">
+                    <div class="img_container">
+                        <img src="#" id="artworkImage2" alt="" class="full_image">
+                    </div>
+                    <br>
+                    <div class="info_label">
+                        <strong>Title:</strong> <span id="artworkTitle2" class="info_content"></span><br>
+                        <strong>Period:</strong> <span id="artworkPeriod2" class="info_content"></span><br>
+                        <strong>Artist:</strong> <span id="artworkArtist2" class="info_content"></span><br>
+                        <strong>Date:</strong> <span id="artworkDate2" class="info_content"></span>
+                    </div>
+                </div>
+    
+                <div class="card_grid">
+                    <div class="img_container">
+                        <img src="#" id="artworkImage3" alt="" class="full_image">
+                    </div>
+                    <br>
+                    <div class="info_label">
+                        <strong>Title:</strong> <span id="artworkTitle3" class="info_content"></span><br>
+                        <strong>Period:</strong> <span id="artworkPeriod3" class="info_content"></span><br>
+                        <strong>Artist:</strong> <span id="artworkArtist3" class="info_content"></span><br>
+                        <strong>Date:</strong> <span id="artworkDate3" class="info_content"></span>
+                    </div>
                 </div>
             </div>
-
-            <div class="card_grid">
-                <div class="img_container">
-                    <img src="#" id="artworkImage2" alt="" class="full_image">
-                </div>
-                <br>
-                <div class="info_label">
-                    <strong>Title:</strong> <span id="artworkTitle2" class="info_content"></span><br>
-                    <strong>Period:</strong> <span id="artworkPeriod2" class="info_content"></span><br>
-                    <strong>Artist:</strong> <span id="artworkArtist2" class="info_content"></span><br>
-                </div>
+    
+            <div style="text-align: center;">
+                <button onclick="loadNewArtworks()">Show More Artworks</button>
             </div>
-
-            <div class="card_grid">
-                <div class="img_container">
-                    <img src="#" id="artworkImage3" alt="" class="full_image">
-                </div>
-                <br>
-                <div class="info_label">
-                    <strong>Title:</strong> <span id="artworkTitle3" class="info_content"></span><br>
-                    <strong>Period:</strong> <span id="artworkPeriod3" class="info_content"></span><br>
-                    <strong>Artist:</strong> <span id="artworkArtist3" class="info_content"></span><br>
-                </div>
-            </div>
-        </div>
-
-        <div style="text-align: center;">
-            <button onclick="loadNewArtworks()">Show More Artworks</button>
-        </div>
-    </main>
-
-    <footer>
-        <p>&copy; 2024 by Ritika Ramesh, Bria Pickel, Grace Mullery, Ashwathi Thilak, Alice Viggiani. All Rights Reserved.</p>
-    </footer>
-
-    <script>
-        // art periods config
-        const periods = [
-            { name: 'Renaissance', query: 'Renaissance' },
-            { name: 'Baroque', query: 'Baroque' },
-            { name: 'Medieval', query: 'Medieval Art' }
-        ];
-
-        async function getArtworkByPeriod(period, position) {
-            try {
-                const searchUrl = `https://collectionapi.metmuseum.org/public/collection/v1/search?q=${period.query}&hasImages=true&medium=Paintings`;
-                const response = await fetch(searchUrl);
-                const data = await response.json();
-
-                if (!data.objectIDs) return;
-
-                const randomId = data.objectIDs[Math.floor(Math.random() * data.objectIDs.length)];
-                const objectUrl = `https://collectionapi.metmuseum.org/public/collection/v1/objects/${randomId}`;
-                const objectResponse = await fetch(objectUrl);
-                const artwork = await objectResponse.json();
-
-                if (artwork.primaryImage) {
-                    document.getElementById(`artworkImage${position}`).src = artwork.primaryImage;
-                    document.getElementById(`artworkTitle${position}`).textContent = artwork.title;
-                    document.getElementById(`artworkPeriod${position}`).textContent = period.name;
-                    document.getElementById(`artworkArtist${position}`).textContent = artwork.artistDisplayName || 'Unknown Artist';
+        </main>
+    
+        <footer>
+            <p>&copy; 2024 by Ritika Ramesh, Bria Pickel, Grace Mullery, Ashwathi Thilak, Alice Viggiani. All Rights Reserved.</p>
+        </footer>
+    
+        <script>
+            const periods = [
+                {
+                    name: 'Renaissance',
+                    searchTerms: 'Renaissance paintings European 1400-1600'
+                },
+                {
+                    name: 'Baroque',
+                    searchTerms: 'Baroque paintings European 1600-1750'
+                },
+                {
+                    name: 'Medieval',
+                    searchTerms: 'Medieval paintings European 1000-1400'
                 }
-            } catch (error) {
-                console.error('Error loading artwork:', error);
-            }
-        }
+            ];
+    
+            async function getArtworkByPeriod(period, position) {
+                try {
 
-        async function loadNewArtworks() {
-            for (let i = 0; i < 3; i++) {
-                await getArtworkByPeriod(periods[i], i + 1);
+                    const searchUrl = `https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&q=${period.searchTerms}`;
+                    const response = await fetch(searchUrl);
+                    const data = await response.json();
+    
+                    if (!data.objectIDs || data.objectIDs.length === 0) {
+                        console.log('No artworks found for', period.name);
+                        return;
+                    }
+    
+                    const randomIndex = Math.floor(Math.random() * data.objectIDs.length);
+                    const randomId = data.objectIDs[randomIndex];
+    
+                    const objectUrl = `https://collectionapi.metmuseum.org/public/collection/v1/objects/${randomId}`;
+                    const objectResponse = await fetch(objectUrl);
+                    const artwork = await objectResponse.json();
+    
+                    if (artwork.primaryImage) {
+                        document.getElementById(`artworkImage${position}`).src = artwork.primaryImage;
+                        document.getElementById(`artworkTitle${position}`).textContent = artwork.title || 'Untitled';
+                        document.getElementById(`artworkPeriod${position}`).textContent = period.name;
+                        document.getElementById(`artworkArtist${position}`).textContent = artwork.artistDisplayName || 'Unknown Artist';
+                        document.getElementById(`artworkDate${position}`).textContent = artwork.objectDate || 'Date unknown';
+                    }
+                } catch (error) {
+                    console.error('Error loading artwork:', error);
+                }
             }
-        }
+    
+            async function loadNewArtworks() {
+   
+                for (let i = 1; i <= 3; i++) {
+                    document.getElementById(`artworkImage${i}`).src = '#';
+                    document.getElementById(`artworkTitle${i}`).textContent = 'Loading...';
+                    document.getElementById(`artworkPeriod${i}`).textContent = '';
+                    document.getElementById(`artworkArtist${i}`).textContent = '';
+                    document.getElementById(`artworkDate${i}`).textContent = '';
+                }
+    
 
-        // loading the initial artworks when page loads
-        window.onload = loadNewArtworks;
-    </script>
-</body>
+                for (let i = 0; i < periods.length; i++) {
+                    await getArtworkByPeriod(periods[i], i + 1);
+                }
+            }
+    
+            window.onload = loadNewArtworks;
+        </script>
+    </body>
 </html>
