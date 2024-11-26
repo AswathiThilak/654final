@@ -1,69 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
+    <head>
         <!-- main meta tags -->
-            <meta charset="utf-8">
-            <meta name="author" content="art history">
-            <meta name="viewport" content="width=device-width, initial-scale=1">
-            <title> </title>
-
-        <!-- google font -->
-            
-
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title> Art History Home Page </title>
+      
+      
+         <!-- google font -->
+      
         <!-- link to CSS -->
-            <link href="style.css" rel="stylesheet" type="text/css">
-
+        <link rel="stylesheet" href="style.css">
+      
         <!-- link to JavaScript -->
-            <script src="app.js" async></script>
-    </head>
-        
-    <body>
-        <header>
-            <!-- oh h1 can be our logo --> 
-            <h1><a href="index.html"><img src="#" alt="#"></a></h1> 
+        <script src="app.js" async></script>
+      </head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="renaissance.html">Renaissance</a></li>
+                <li><a href="baroque.html">Baroque</a></li>
+                <li><a href="medieval.html">Medieval</a></li>
+                <li><a href="games.html">Games</a></li>
+                <li><a href="resources.html">Resources</a></li>
+            </ul>
+        </nav>
+    </header>
 
-            <!-- our navigation bar --> 
-            <nav>
-              
-                <ul>
-                    <li>
-                        <a href="renaissance.html">Renaissance</a>
-                        
-                    </li>
+    <main>
+        <div id="header">
+            <h1>Art History Explorer</h1>
+            <h2>Discover Art Through Different Time Periods</h2>
+        </div>
 
-                    <li>
-                        <a href="baroque.html">Baroque</a>
-                    </li>
+        <div class="grid-container">
+            <div class="card_grid">
+                <div class="img_container">
+                    <img src="#" id="artworkImage1" alt="" class="full_image">
+                </div>
+                <br>
+                <div class="info_label">
+                    <strong>Title:</strong> <span id="artworkTitle1" class="info_content"></span><br>
+                    <strong>Period:</strong> <span id="artworkPeriod1" class="info_content"></span><br>
+                    <strong>Artist:</strong> <span id="artworkArtist1" class="info_content"></span><br>
+                </div>
+            </div>
 
-                    <li>
-                        <a href="medieval.html">Medieval</a>
-                    </li>
+            <div class="card_grid">
+                <div class="img_container">
+                    <img src="#" id="artworkImage2" alt="" class="full_image">
+                </div>
+                <br>
+                <div class="info_label">
+                    <strong>Title:</strong> <span id="artworkTitle2" class="info_content"></span><br>
+                    <strong>Period:</strong> <span id="artworkPeriod2" class="info_content"></span><br>
+                    <strong>Artist:</strong> <span id="artworkArtist2" class="info_content"></span><br>
+                </div>
+            </div>
 
-                    <li>
-                        <a href="games.html">Games</a>
-                    </li>
+            <div class="card_grid">
+                <div class="img_container">
+                    <img src="#" id="artworkImage3" alt="" class="full_image">
+                </div>
+                <br>
+                <div class="info_label">
+                    <strong>Title:</strong> <span id="artworkTitle3" class="info_content"></span><br>
+                    <strong>Period:</strong> <span id="artworkPeriod3" class="info_content"></span><br>
+                    <strong>Artist:</strong> <span id="artworkArtist3" class="info_content"></span><br>
+                </div>
+            </div>
+        </div>
 
-                    <li>
-                        <a href="resources.html">Resources</a>
-                    </li>
+        <div style="text-align: center;">
+            <button onclick="loadNewArtworks()">Show More Artworks</button>
+        </div>
+    </main>
 
-                </ul>
-            </nav>
-        </header>
+    <footer>
+        <p>&copy; 2024 by Ritika Ramesh, Bria Pickel, Grace Mullery, Ashwathi Thilak, Alice Viggiani. All Rights Reserved.</p>
+    </footer>
 
-        <main>
-        <!-- our main content goes here --> 
+    <script>
+        // art periods config
+        const periods = [
+            { name: 'Renaissance', query: 'Renaissance' },
+            { name: 'Baroque', query: 'Baroque' },
+            { name: 'Medieval', query: 'Medieval Art' }
+        ];
 
+        async function getArtworkByPeriod(period, position) {
+            try {
+                const searchUrl = `https://collectionapi.metmuseum.org/public/collection/v1/search?q=${period.query}&hasImages=true&medium=Paintings`;
+                const response = await fetch(searchUrl);
+                const data = await response.json();
 
+                if (!data.objectIDs) return;
 
-        </main>
+                const randomId = data.objectIDs[Math.floor(Math.random() * data.objectIDs.length)];
+                const objectUrl = `https://collectionapi.metmuseum.org/public/collection/v1/objects/${randomId}`;
+                const objectResponse = await fetch(objectUrl);
+                const artwork = await objectResponse.json();
 
-        <!-- footer --> 
-        <footer>
+                if (artwork.primaryImage) {
+                    document.getElementById(`artworkImage${position}`).src = artwork.primaryImage;
+                    document.getElementById(`artworkTitle${position}`).textContent = artwork.title;
+                    document.getElementById(`artworkPeriod${position}`).textContent = period.name;
+                    document.getElementById(`artworkArtist${position}`).textContent = artwork.artistDisplayName || 'Unknown Artist';
+                }
+            } catch (error) {
+                console.error('Error loading artwork:', error);
+            }
+        }
 
-            <p>&copy; 2024 by Ritika Ramesh, Bria Pickel, Grace Mullery, Ashwathi Thilak, Alice Viggiani. All Rights Reserved.</p>
+        async function loadNewArtworks() {
+            for (let i = 0; i < 3; i++) {
+                await getArtworkByPeriod(periods[i], i + 1);
+            }
+        }
 
-        </footer>
-    </body>
+        // loading the initial artworks when page loads
+        window.onload = loadNewArtworks;
+    </script>
+</body>
 </html>
-
