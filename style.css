@@ -73,7 +73,7 @@ nav a:hover {
 
 button {
     padding: 10px 20px;
-    background-color: #4CAF50;
+    background-color: #48a9ad;
     color: white;
     border: none;
     border-radius: 4px;
@@ -83,7 +83,7 @@ button {
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: #258a8d;
 
 }
 
