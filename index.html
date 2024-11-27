@@ -123,7 +123,7 @@
                     if (artwork.primaryImage) {
                         document.getElementById(`artworkImage${position}`).src = artwork.primaryImage;
                         document.getElementById(`artworkTitle${position}`).textContent = artwork.title || 'Untitled';
-                        document.getElementById(`artworkPeriod${position}`).textContent = period.name || '';
+                        document.getElementById(`artworkPeriod${position}`).textContent = period.name;
                         document.getElementById(`artworkArtist${position}`).textContent = artwork.artistDisplayName || 'Unknown Artist';
                         document.getElementById(`artworkDate${position}`).textContent = artwork.objectEndDate || 'Date unknown';                //double check the artworkdate field it needs to pull from BeginDate or EndDate.
                     }
