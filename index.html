@@ -20,9 +20,9 @@
             <nav>
                 <ul>
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="renaissance.html">Renaissance</a></li>
-                    <li><a href="baroque.html">Baroque</a></li>
                     <li><a href="medieval.html">Medieval</a></li>
+                    <li><a href="renaissance.html">Renaissance</a></li>
+                    <li><a href="baroque.html">Baroque</a></li> <!--i changed the order to reflect chronological order BPF -->
                     <li><a href="games.html">Games</a></li>
                     <li><a href="resources.html">Resources</a></li>
                 </ul>
@@ -88,6 +88,10 @@
         <script>
             const periods = [
                 {
+                    name: 'Medieval',
+                    searchTerms: 'Medieval paintings European 1000-1400'
+                }
+                {
                     name: 'Renaissance',
                     searchTerms: 'Renaissance paintings European 1400-1600'
                 },
@@ -95,11 +99,7 @@
                     name: 'Baroque',
                     searchTerms: 'Baroque paintings European 1600-1750'
                 },
-                {
-                    name: 'Medieval',
-                    searchTerms: 'Medieval paintings European 1000-1400'
-                }
-            ];
+            ];                                                                                                                        //i changed the order to reflect the timeline BPF.
     
             async function getArtworkByPeriod(period, position) {
                 try {
@@ -136,7 +136,7 @@
    
                 for (let i = 1; i <= 3; i++) {
                     document.getElementById(`artworkImage${i}`).src = '#';
-                    document.getElementById(`artworkTitle${i}`).textContent = 'Loading...';
+                    document.getElementById(`artworkTitle${i}`).textContent = 'Loading...'; //is this why it just says loading at certain times? what is this accounting for? BPF
                     document.getElementById(`artworkPeriod${i}`).textContent = '';
                     document.getElementById(`artworkArtist${i}`).textContent = '';
                     document.getElementById(`artworkDate${i}`).textContent = '';
