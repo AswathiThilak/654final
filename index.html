@@ -58,7 +58,7 @@
                         <strong>Title:</strong> <span id="artworkTitle2" class="info_content"></span><br>
                         <strong>Period:</strong> <span id="artworkPeriod2" class="info_content"></span><br>
                         <strong>Artist:</strong> <span id="artworkArtist2" class="info_content"></span><br>
-                        <strong>Date:</strong> <span id="artworkDate2" class="info_content"></span>
+                        <strong>Date:</strong> <span id="artworkDate2" class="info_content"></span>                   
                     </div>
                 </div>
     
@@ -125,7 +125,7 @@
                         document.getElementById(`artworkTitle${position}`).textContent = artwork.title || 'Untitled';
                         document.getElementById(`artworkPeriod${position}`).textContent = period.name;
                         document.getElementById(`artworkArtist${position}`).textContent = artwork.artistDisplayName || 'Unknown Artist';
-                        document.getElementById(`artworkDate${position}`).textContent = artwork.objectDate || 'Date unknown';
+                        document.getElementById(`artworkDate${position}`).textContent = artwork.objectEndDate || 'Date unknown';                //double check the artworkdate field it needs to pull from BeginDate or EndDate.
                     }
                 } catch (error) {
                     console.error('Error loading artwork:', error);
