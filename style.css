@@ -248,7 +248,7 @@ footer {
 
 .card_grid #quiz_cta p {
     font-size: 24px;
-    color: #4355A2;
+    color: #6B7F82;
     margin-bottom: 20px;
     font-weight: 500;
 
@@ -256,7 +256,7 @@ footer {
 
 .card_grid #quiz_cta h1 {
     font-size: 32px;
-    color: #489F9C;
+    color: #6B7F82;
     margin: 20px 0;
 
 }
@@ -264,7 +264,7 @@ footer {
 #submit_left, #submit_right {
     padding: 12px 24px;
     margin: 10px;
-    background-color: #489F9C;
+    background-color: #6B7F82;
     color: white;
     border: none;
     border-radius: 6px;
@@ -278,7 +278,7 @@ footer {
 #submit_next {
     padding: 12px 30px;
     margin: 20px 10px;
-    background-color: #4355A2;
+    background-color: #5B5750;
     color: white;
     border: none;
     border-radius: 6px;
@@ -296,12 +296,12 @@ footer {
 }
 
 #submit_left:hover, #submit_right:hover {
-    background-color: #B46367;
+    background-color: #492C1D;
 
 }
 
 #submit_next:hover {
-    background-color: #489F9C;
+    background-color: #7C99B4;
 
 }
 
