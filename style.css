@@ -107,7 +107,7 @@ nav a:hover {
 }
 
 .info_label strong {
-    color: #4355A2;
+    color: #492C1D;
     font-size: 14px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -316,7 +316,7 @@ footer {
 }
 
 #info_label_left strong, #info_label_right strong {
-    color: #4355A2;
+    color: #492C1D;
     font-weight: 500;
 
 }
@@ -330,7 +330,7 @@ footer {
 
 #myResult {
     font-size: 20px;
-    color: #4355A2;
+    color: #492C1D;
     font-weight: 500;
 
 }
