@@ -208,6 +208,11 @@ footer {
 
 }
 
+.period h4 {
+    display: none;
+
+}
+
 .period .info {
     background: white;
     border-radius: 12px;
@@ -236,7 +241,7 @@ footer {
 }
 
 /* ---------- game page styling ---------- */
-.card_grid #quiz_cta {
+.card_grid .quiz_cta {
     background: white;
     padding: 25px;
     border-radius: 12px;
@@ -246,7 +251,7 @@ footer {
 
 }
 
-.card_grid #quiz_cta p {
+.card_grid .quiz_cta p {
     font-size: 24px;
     color: #6B7F82;
     margin-bottom: 20px;
@@ -254,7 +259,7 @@ footer {
 
 }
 
-.card_grid #quiz_cta h1 {
+.card_grid .quiz_cta h1 {
     font-size: 32px;
     color: #6B7F82;
     margin: 20px 0;

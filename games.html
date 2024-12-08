@@ -6,7 +6,7 @@
   <!-- main meta tags -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> artsy game </title>
+  <title> Art History Home Page </title>
 
 
    <!-- google font -->
@@ -159,16 +159,16 @@
 
 
         <div class="card_grid">
-          <div id="quiz_cta">
+          <div class="quiz_cta">
             <p>Which one is the oldest?</p> <br>
             <button type="button" id="submit_left" onClick="calculateOlder('left')">← Left is older</button>
             <button type="button" id="submit_right" onClick="calculateOlder('right')">Right is older →</button> <br>
             <button type="button" id="submit_next" onClick="getPairedElements()">Next Pair</button>
           </div>
 
-          <div id="quiz_cta">
+          <div class="quiz_cta">
             <p>Result:</p> <br>
-            <h1 id="myResultMessage"></h1>
+            <h1 id="myResultMessage" aria-hidden="true" class="hidden">Results</h1>
             <span id="myResult" class="info_content"></span> <br>
           </div>
 
