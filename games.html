@@ -2,190 +2,185 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <!-- main meta tags -->
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> Art History Home Page </title>
+  <head>
+    <!-- main meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Art History Home Page </title>
 
+    <!-- link to CSS -->
+    <link rel="stylesheet" href="style.css">
 
-   <!-- google font -->
+  </head>
 
-  <!-- link to CSS -->
-  <link rel="stylesheet" href="style.css">
+  <body>
+    <!-- Script to randomly get an Object ID by a filtered scope -->
+    <!-- Getting data from the search's API -->
+    <script> 
+      async function getObjectsList(departmentId, position) {
+        let url = `https://collectionapi.metmuseum.org/public/collection/v1/search?departmentId=${departmentId}&isHighlight=true&hasImages=true&isPublicDomain=true&q=a`;
 
-</head>
+        const response = await fetch(url);
+        const jsonData = await response.json();
 
-<body>
-  
-  <!-- Script to randomly get an Object ID by a filtered scope -->
-  <!-- Getting data from the search's API -->
-  <script> 
-    async function getObjectsList(departmentId, position) {
-      let url = `https://collectionapi.metmuseum.org/public/collection/v1/search?departmentId=${departmentId}&isHighlight=true&hasImages=true&isPublicDomain=true&q=a`;
+        const totalCount = jsonData.total;
+        let randomElement = Math.floor(Math.random()*totalCount);
+        let elementId = jsonData.objectIDs[randomElement];
 
-      const response = await fetch(url);
-      const jsonData = await response.json();
+        document.getElementById("totalCount").innerText = totalCount;
+        document.getElementById("elementId").innerText = elementId;
 
-      const totalCount = jsonData.total;
-      let randomElement = Math.floor(Math.random()*totalCount);
-      let elementId = jsonData.objectIDs[randomElement];
-
-      document.getElementById("totalCount").innerText = totalCount;
-      document.getElementById("elementId").innerText = elementId;
-
-      getObjectData(elementId, position);
-    }
-  </script>
-  
-  
-  <!-- Script to get the id generated randomly and ask the other atributes of its element -->
-  <!-- Getting data from the object's API -->
-  <script> 
-    async function getObjectData(elementId, position) {
-      let urlObject = `https://collectionapi.metmuseum.org/public/collection/v1/objects/${elementId}`;
-      const responseObject = await fetch(urlObject);
-      const jsonDataObject = await responseObject.json();
-
-      document.getElementById(`my${position}Img`).src = jsonDataObject.primaryImage;
-      document.getElementById(`my${position}Date`).innerText = jsonDataObject.objectEndDate;
-      document.getElementById(`my${position}Title`).innerText = jsonDataObject.title;
-      document.getElementById(`my${position}Department`).innerText = jsonDataObject.department;
-      document.getElementById(`my${position}Id`).innerText = jsonDataObject.objectID;
+        getObjectData(elementId, position);
       }
-  </script>
+    </script>
+    
+    
+    <!-- Script to get the id generated randomly and ask the other atributes of its element -->
+    <!-- Getting data from the object's API -->
+    <script> 
+      async function getObjectData(elementId, position) {
+        let urlObject = `https://collectionapi.metmuseum.org/public/collection/v1/objects/${elementId}`;
+        const responseObject = await fetch(urlObject);
+        const jsonDataObject = await responseObject.json();
 
-  <script>
-    function getPairedElements() {
-      document.getElementById('myResultMessage').innerText = ''; //to erase the previous info
-      document.getElementById('myResult').innerText = '';
-      document.getElementById('info_label_left').style.display = "none";
-      document.getElementById('info_label_right').style.display = "none";
-
-      const departmentArray = [7, 10, 11, 17];
-      const departmentArrayLenght = departmentArray.length;
-      let departmentId1 = departmentArray[Math.floor(Math.random()*departmentArrayLenght)];
-      let departmentId2 = departmentArray[Math.floor(Math.random()*departmentArrayLenght)];
-
-      getObjectsList(departmentId1, 'Left');
-      getObjectsList(departmentId2, 'Right');      
-    }
-  </script>
-
-  
-  <!-- Script to produce a calculation that compares what date is the oldest and print the result-->
-  <script>
-    function calculateOlder(buttonClicked) {
-      let leftDate = document.getElementById('myLeftDate').innerText;
-      let rightDate = document.getElementById('myRightDate').innerText;
-
-      document.getElementById('info_label_left').style.display = "block";
-      document.getElementById('info_label_right').style.display = "block";
-
-      if (leftDate < rightDate) {
-        if (buttonClicked == 'left') {
-          document.getElementById(`myResultMessage`).innerText = 'You are right!';
-        } else {
-          document.getElementById(`myResultMessage`).innerText = 'Try again ;)';
+        document.getElementById(`my${position}Img`).src = jsonDataObject.primaryImage;
+        document.getElementById(`my${position}Date`).innerText = jsonDataObject.objectEndDate;
+        document.getElementById(`my${position}Title`).innerText = jsonDataObject.title;
+        document.getElementById(`my${position}Department`).innerText = jsonDataObject.department;
+        document.getElementById(`my${position}Id`).innerText = jsonDataObject.objectID;
         }
-        document.getElementById(`myResult`).innerText = 'Left is older!';
-      } else if (leftDate > rightDate) {
-        if (buttonClicked == 'left') {
-          document.getElementById(`myResultMessage`).innerText = 'Try again :)';
-        } else {
-          document.getElementById(`myResultMessage`).innerText = 'You are right!';
-        }
-        document.getElementById(`myResult`).innerText = 'Right is older!';
-      } else if (leftDate == rightDate) {
-        document.getElementById(`myResult`).innerText = 'Same!';
-      } else {
-        document.getElementById(`myResult`).innerText = 'Don\'t know what happened!';
+    </script>
+
+    <script>
+      function getPairedElements() {
+        document.getElementById('myResultMessage').innerText = ''; //to erase the previous info
+        document.getElementById('myResult').innerText = '';
+        document.getElementById('info_label_left').style.display = "none";
+        document.getElementById('info_label_right').style.display = "none";
+
+        const departmentArray = [7, 10, 11, 17];
+        const departmentArrayLenght = departmentArray.length;
+        let departmentId1 = departmentArray[Math.floor(Math.random()*departmentArrayLenght)];
+        let departmentId2 = departmentArray[Math.floor(Math.random()*departmentArrayLenght)];
+
+        getObjectsList(departmentId1, 'Left');
+        getObjectsList(departmentId2, 'Right');      
       }
+    </script>
+    
+    <!-- Script to produce a calculation that compares what date is the oldest and print the result-->
+    <script>
+      function calculateOlder(buttonClicked) {
+        let leftDate = document.getElementById('myLeftDate').innerText;
+        let rightDate = document.getElementById('myRightDate').innerText;
 
-    }
-  </script>
+        document.getElementById('info_label_left').style.display = "block";
+        document.getElementById('info_label_right').style.display = "block";
 
-  <header>
-    <nav>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-          <li><a href="medieval.html">Medieval</a></li>
-            <li><a href="renaissance.html">Renaissance</a></li>
-            <li><a href="impressionism.html">Impressionism</a></li>
-            <li><a href="games.html">Games</a></li>
-            <li><a href="resources.html">Resources</a></li>
-        </ul>
-    </nav>
-  </header>
+        if (leftDate < rightDate) {
+          if (buttonClicked == 'left') {
+            document.getElementById(`myResultMessage`).innerText = 'You are right!';
+          } else {
+            document.getElementById(`myResultMessage`).innerText = 'Try again ;)';
+          }
+          document.getElementById(`myResult`).innerText = 'Left is older!';
+        } else if (leftDate > rightDate) {
+          if (buttonClicked == 'left') {
+            document.getElementById(`myResultMessage`).innerText = 'Try again :)';
+          } else {
+            document.getElementById(`myResultMessage`).innerText = 'You are right!';
+          }
+          document.getElementById(`myResult`).innerText = 'Right is older!';
+        } else if (leftDate == rightDate) {
+          document.getElementById(`myResult`).innerText = 'Same!';
+        } else {
+          document.getElementById(`myResult`).innerText = 'Don\'t know what happened!';
+        }
+
+      }
+    </script>
+
+    <header>
+      <nav>
+          <ul>
+              <li><a href="index.html">Home</a></li>
+            <li><a href="medieval.html">Medieval</a></li>
+              <li><a href="renaissance.html">Renaissance</a></li>
+              <li><a href="impressionism.html">Impressionism</a></li>
+              <li><a href="games.html">Games</a></li>
+              <li><a href="resources.html">Resources</a></li>
+          </ul>
+      </nav>
+    </header>
 
 
-  <!-- HTLM to create the layout -->
-   <main>
-    <!-- our main content goes here --> 
-      <div id="header">
-        <h1>Artsy Game</h1> 
-        <h2>Let's find out something about art!</h2> 
-      </div>
+    <!-- HTLM to create the layout -->
+    <main>
+      <!-- our main content goes here --> 
+        <div id="header">
+          <h1>Artsy Game</h1> 
+          <h2>Let's find out something about art!</h2> 
+        </div>
 
-      <div class="grid-container">
+        <div class="grid-container">
 
-        <div class="card_grid">
-          <div id="card_left">
-            <div class="img_container">
-              <img src="https://media.tate.org.uk/aztate-prd-ew-dg-wgtail-st1-ctr-data/images/malevich5_0_EI2bD0b.width-1200.jpg" id="myLeftImg" alt="myLeftTitle" class="full_image"> 
-            </div> <br>
-            <div id="info_label_left">
-              Title: <span id="myLeftTitle" class="info_content"></span> <br>
-              Department: <span id="myLeftDepartment" class="info_content"></span> <br>
-              Date: <span id="myLeftDate" class="info_content"></span> <br>
-              Id: <span id="myLeftId" class="info_content"></span>
+          <div class="card_grid">
+            <div id="card_left">
+              <div class="img_container">
+                <img src="https://media.tate.org.uk/aztate-prd-ew-dg-wgtail-st1-ctr-data/images/malevich5_0_EI2bD0b.width-1200.jpg" id="myLeftImg" alt="myLeftTitle" class="full_image"> 
+              </div> <br>
+              <div id="info_label_left">
+                Title: <span id="myLeftTitle" class="info_content"></span> <br>
+                Department: <span id="myLeftDepartment" class="info_content"></span> <br>
+                Date: <span id="myLeftDate" class="info_content"></span> <br>
+                Id: <span id="myLeftId" class="info_content"></span>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="card_grid">
-          <div id="card_right">
-            <div class="img_container">
-              <img src="https://media.tate.org.uk/aztate-prd-ew-dg-wgtail-st1-ctr-data/images/malevich5_0_EI2bD0b.width-1200.jpg" id="myRightImg" alt="myRightTitle" class="full_image"> 
-            </div> <br>
-            <div id="info_label_right">
-              Title: <span id="myRightTitle" class="info_content"></span> <br>
-              Department: <span id="myRightDepartment" class="info_content"></span> <br>
-              Date: <span id="myRightDate" class="info_content"></span> <br>
-              Id: <span id="myRightId" class="info_content"></span>
+          <div class="card_grid">
+            <div id="card_right">
+              <div class="img_container">
+                <img src="https://media.tate.org.uk/aztate-prd-ew-dg-wgtail-st1-ctr-data/images/malevich5_0_EI2bD0b.width-1200.jpg" id="myRightImg" alt="myRightTitle" class="full_image"> 
+              </div> <br>
+              <div id="info_label_right">
+                Title: <span id="myRightTitle" class="info_content"></span> <br>
+                Department: <span id="myRightDepartment" class="info_content"></span> <br>
+                Date: <span id="myRightDate" class="info_content"></span> <br>
+                Id: <span id="myRightId" class="info_content"></span>
+              </div>
             </div>
           </div>
+
+
+          <div class="card_grid">
+            <div class="quiz_cta">
+              <p>Which one is the oldest?</p> <br>
+              <button type="button" id="submit_left" onClick="calculateOlder('left')">← Left is older</button>
+              <button type="button" id="submit_right" onClick="calculateOlder('right')">Right is older →</button> <br>
+              <button type="button" id="submit_next" onClick="getPairedElements()">Next Pair</button>
+            </div>
+
+            <div class="quiz_cta">
+              <p>Result:</p> <br>
+              <h1 id="myResultMessage" aria-hidden="true" class="hidden">Results</h1>
+              <span id="myResult" class="info_content"></span> <br>
+            </div>
+
+            <div>
+              Id of the random element: <span id="elementId"></span> <br>
+              Total of elements: <span id="totalCount"></span> <br>
+            </div>
+
+          </div>
+
         </div>
+      </main>
 
+        <!-- footer --> 
+      <footer>
+        <p>&copy; 2024 by Ritika Ramesh, Alice Viggiani, Grace Mullery, Ashwathi Thilak, Bria Pickel. All Rights Reserved.</p>
+      </footer>
 
-        <div class="card_grid">
-          <div class="quiz_cta">
-            <p>Which one is the oldest?</p> <br>
-            <button type="button" id="submit_left" onClick="calculateOlder('left')">← Left is older</button>
-            <button type="button" id="submit_right" onClick="calculateOlder('right')">Right is older →</button> <br>
-            <button type="button" id="submit_next" onClick="getPairedElements()">Next Pair</button>
-          </div>
-
-          <div class="quiz_cta">
-            <p>Result:</p> <br>
-            <h1 id="myResultMessage" aria-hidden="true" class="hidden">Results</h1>
-            <span id="myResult" class="info_content"></span> <br>
-          </div>
-
-          <div>
-            Id of the random element: <span id="elementId"></span> <br>
-            Total of elements: <span id="totalCount"></span> <br>
-          </div>
-
-        </div>
-
-      </div>
-    </main>
-
-   <!-- footer -->  
-   <footer>
-      <p>&copy; 2024 by Ritika Ramesh, Alice Viggiani, Grace Mullery, Ashwathi Thilak, Bria Pickel. All Rights Reserved.</p>
-   </footer>
-
-</body>
+  </body>
 </html>
